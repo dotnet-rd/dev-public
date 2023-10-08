@@ -11,6 +11,48 @@ using System.Threading.Tasks;
 
 namespace ConsumeWebApisUsingHttpClient.Service
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net.Http;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    namespace ConsumeWebApisUsingHttpClient.Common
+    {
+        public class Helpers
+        {
+            public static FormUrlEncodedContent CreateFormUrlEncodedContent(Dictionary<string, string> keyValuePairs)
+            {
+                FormUrlEncodedContent formUrlContent;
+
+                try
+                {
+
+                    var keyValueList = new List<KeyValuePair<string, string>>();
+
+                    foreach (var kv in keyValuePairs)
+                    {
+                        keyValueList.Add(new KeyValuePair<string, string>(kv.Key, kv.Value));
+                    }
+
+                    formUrlContent = new FormUrlEncodedContent(keyValueList);
+
+                    return formUrlContent;
+
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+
+            }
+        }
+    }
+
     public class ConsumeRestServices
     {
 
