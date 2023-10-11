@@ -108,4 +108,36 @@ namespace MyData.Logic.Thor
             return new ResultOrModelError<TResult>(error);
         }
     }
+
+
+
+    public class ResultOrError<TValue, TError>
+    {
+        public bool IsResult { get; }
+        public TValue Result { get; }
+        public TError Error { get; }
+
+        private ResultOrError(TValue result)
+        {
+            IsResult = true;
+            Result = result;
+        }
+
+        private ResultOrError(TError error)
+        {
+            IsResult = false;
+            Error = error;
+        }
+
+        public static ResultOrError<TValue, TError> CreateResult(TValue result)
+        {
+            return new ResultOrError<TValue, TError>(result);
+        }
+
+        public static ResultOrError<TValue, TError> CreateError(TError error)
+        {
+            return new ResultOrError<TValue, TError>(error);
+        }
+    }
+
 }
