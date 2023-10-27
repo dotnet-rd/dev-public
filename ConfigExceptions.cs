@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace Kmd.Logic.Thor.Exceptions
+namespace test.Exceptions
 {
     [Serializable]
     public class ConfigurationErrorException : Exception

@@ -9,7 +9,7 @@ using Polly;
 using Polly.Extensions.Http;
 using Polly.Timeout;
 
-namespace Kmd.Logic.Thor.Framework
+namespace test.Framework
 {
     public static class ServiceCollectionExtensions
     {
