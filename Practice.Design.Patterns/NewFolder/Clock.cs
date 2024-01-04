@@ -17,4 +17,25 @@ namespace Kmd.Logic.Thor.Framework
     {
         public DateTimeOffset UtcNow => DateTimeOffset.UtcNow;
     }
+
+
+    [Serializable]
+    public class CertificateCacheException : Exception
+    {
+        public CertificateCacheException()
+        {
+        }
+
+        public CertificateCacheException(string message) : base(message)
+        {
+        }
+
+        public CertificateCacheException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        protected CertificateCacheException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+    }
 }
