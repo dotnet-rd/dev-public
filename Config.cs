@@ -16,3 +16,45 @@ public static TConfiguration GetSection<TConfiguration>(this IConfiguration conf
 
     return configurationSection;
 }
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Program
+{
+    static void Main()
+    {
+        // Assuming you have a dictionary
+        Dictionary<string, string> inputDictionary = new Dictionary<string, string>
+        {
+            { "Configom", "0:AT,1:AD,2:dd" }
+        };
+
+        string key = "Configom"; // Change this to the desired key
+        int targetIndex = 1; // Change this to the desired index
+
+        if (inputDictionary.TryGetValue(key, out string value))
+        {
+            var result = value
+                .Split(',')
+                .Select(part => part.Split(':'))
+                .Where(keyValue => keyValue.Length == 2 && int.TryParse(keyValue[0], out int index) && index == targetIndex)
+                .Select(keyValue => keyValue[1])
+                .FirstOrDefault();
+
+            if (result != null)
+            {
+                Console.WriteLine($"Value at index {targetIndex}: {result}");
+            }
+            else
+            {
+                Console.WriteLine($"Index {targetIndex} not found in the value associated with key {key}");
+            }
+        }
+        else
+        {
+            Console.WriteLine($"Key {key} not found in the dictionary");
+        }
+    }
+}
