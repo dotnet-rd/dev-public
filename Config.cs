@@ -25,36 +25,22 @@ class Program
     static void Main()
     {
         // Assuming you have a dictionary
-        Dictionary<string, string> inputDictionary = new Dictionary<string, string>
+        string targetValue = "0"; // Change this to the desired value
+
+        var matchingKeys = inputDictionary
+            .Where(entry => entry.Value.Split(',')
+                                     .Select(part => part.Split(':'))
+                                     .Any(keyValue => keyValue.Length == 2 && keyValue[0] == targetValue))
+            .Select(entry => entry.Key)
+            .ToList();
+
+        if (matchingKeys.Any())
         {
-            { "Configom", "0:AT,1:AD,2:dd" }
-            // Add more entries if needed
-        };
-
-        string targetKey = "Configom"; // Change this to the desired key
-        int targetIndex = 1; // Change this to the desired index
-
-        if (inputDictionary.TryGetValue(targetKey, out string value))
-        {
-            var result = value
-                .Split(',')
-                .Select(part => part.Split(':'))
-                .Where(keyValue => keyValue.Length == 2 && int.TryParse(keyValue[0], out int index) && index == targetIndex)
-                .Select(keyValue => keyValue[1])
-                .FirstOrDefault();
-
-            if (result != null)
-            {
-                Console.WriteLine($"Value at index {targetIndex} for key '{targetKey}': {result}");
-            }
-            else
-            {
-                Console.WriteLine($"Index {targetIndex} not found in the value associated with key '{targetKey}'");
-            }
+            Console.WriteLine($"Keys associated with exact value '{targetValue}': {string.Join(", ", matchingKeys)}");
         }
         else
         {
-            Console.WriteLine($"Key '{targetKey}' not found in the dictionary");
+            Console.WriteLine($"Exact value '{targetValue}' not found in the dictionary");
         }
     }
 }
